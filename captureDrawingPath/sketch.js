@@ -1,20 +1,20 @@
-let joop;
+let img;
 let offset = 10;
 let m = new Map();    //this keeps track of the points we've already added, to avoid adding duplicate points.
-let points = [];      //this contains all of the (x,y) points of our drawing path
-let dots = [];
+let points = [];      //this contains all of the (x,y) points of our drawing path.
+let dots = [];	      //this contains the points to draw to the screen - representing the points we've already to our path.
 
 function setup(){
   createCanvas(350,515);
-  joop = loadImage('./LeJoop SeeThrough.jpg');
+  Omg = loadImage('./LeJoop SeeThrough.jpg');
 }
 
 
 function draw(){
   background(255);
-  image(joop,0,0);
+  image(img,0,0);
   drawDots();
-  // drawViewBox();
+  drawViewBox();
 
 }
 
@@ -27,7 +27,7 @@ function drawViewBox()
   rect(mouseX-offset/2, mouseY-offset/2, offset, offset);
 }
 
-//this function will capture 10x10px sections of black lines while the mouse is dragged.
+//this function will capture offset^2px sections of black lines while the mouse is dragged.
 function mouseDraggedTest()
 {
   let _mouseX = mouseX;
@@ -39,7 +39,7 @@ function mouseDraggedTest()
   {
     for(let j=-range; j<range; j++)
     {
-      let pix = joop.get(_mouseX+i, _mouseY+j);
+      let pix = img.get(_mouseX+i, _mouseY+j);
 
 
       //check if the current pixel is black.
@@ -78,7 +78,7 @@ function mouseClicked()
   let _mouseX = mouseX;
   let _mouseY = mouseY;
 
-  let pix = joop.get(_mouseX, _mouseY);
+  let pix = img.get(_mouseX, _mouseY);
 
   //check if the current pixel is black.
   //Map = Key: x value, Value: map of y values.
