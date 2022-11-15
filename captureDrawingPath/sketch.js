@@ -6,7 +6,7 @@ let dots = [];	      //this contains the points to draw to the screen - represen
 
 function setup(){
   createCanvas(350,515);
-  Omg = loadImage('./LeJoop SeeThrough.jpg');
+  img = loadImage('./LeJoop SeeThrough.jpg');
 }
 
 
