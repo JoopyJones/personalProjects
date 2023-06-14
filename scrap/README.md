@@ -1,0 +1,1 @@
+This folder is intended to be a backup copy of my random scrap projects from my local machine. Scrap projects are only used as unstructured mini projects for learning and understanding new concepts. These are not polished or finalized, just code doodles.
