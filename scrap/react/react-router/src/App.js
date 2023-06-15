@@ -3,14 +3,15 @@ import {RouterProvider, createBrowserRouter, createRoutesFromElements, Route, } 
 
 //Pages
 import Home from './Pages/Home'; 
-import Stories from './Pages/Stories';
+import {Stories, storyLoader} from './Pages/Stories';
 import NoPage from './Pages/NoPage';
-import Contact from './Pages/Contact';
 import MagicCards from './Pages/MagicCards';
+import Name from './Pages/Name';
 
 //Layouts
 import RouterLayout from './Layouts/RouterLayout';
 import AboutLayout from './Layouts/AboutLayout';
+import ContactLayout from './Layouts/ContactLayout';
 
 function App() {
   const router = createBrowserRouter(
@@ -18,10 +19,12 @@ function App() {
       <Route path='/' element={<RouterLayout/>}>
         <Route index element={<Home/>}/>
         <Route path='about' element={<AboutLayout/>}>
-          <Route path='contact' element={<Contact/>}/>
+          <Route path='contact' element ={<ContactLayout/>}>
+            <Route path=':name' element={<Name/>}/>
+          </Route>
           <Route path='magic-cards' element={<MagicCards/>}/>
         </Route>
-        <Route path='stories' element={<Stories/>}/>
+        <Route path='stories' loader = {storyLoader} element={<Stories/>}/>
         <Route path='*' element={<NoPage/>}/>
       </Route>
     )
