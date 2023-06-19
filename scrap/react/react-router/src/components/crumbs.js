@@ -22,7 +22,7 @@ export default function Crumbs(){
             {crumbs.map((path)=>{
                 //if the current path section is root, print home instead
                 return(
-                    <Link className="crumb" id={path} to={path}>{path === '/' ? 'Home': path}</Link>
+                    <Link className="crumb" key={path} to={path}>{path === '/' ? 'Home': path}</Link>
                 )
             })}
         </div>
