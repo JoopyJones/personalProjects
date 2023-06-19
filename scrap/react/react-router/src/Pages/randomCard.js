@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-function MagicCards(){
+export default function RandomCard(){
     const url = 'https://api.scryfall.com/';
     const group = 'cards/';
     const action = 'random';
@@ -9,7 +9,7 @@ function MagicCards(){
     async function searchForRandomCards(){
         var cardList = [];
 
-        for(let i=0; i<3; i++)
+        for(let i=0; i<1; i++)
         {
             const response = await fetch(`${url}${group}${action}`);
             const data = await response.json();
@@ -44,5 +44,3 @@ function MagicCards(){
         </div>
     )
 }
-
-export default MagicCards;

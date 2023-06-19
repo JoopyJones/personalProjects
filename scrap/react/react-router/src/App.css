@@ -36,10 +36,21 @@ body{
     outline-width: 1px; */
     color: var(--txt);
 }
+/*                          Styling or card sub nav*/
+.card-nav-header{
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.card-nav-header a{
+    color: var(--txt);
+    margin-right: 20px;
+}
 
 /*                          Styling for cardsLayout components*/
 .cards-header h1{
     text-align: center;
+    margin-top: 0;
 }
 
 /*                          Styling for the list of all favorite cards */
@@ -106,4 +117,9 @@ body{
 
 .crumbs-header .crumb:last-child:after{
     display: none;
+}
+
+.card-from-search p{
+    white-space: pre-line;
+
 }

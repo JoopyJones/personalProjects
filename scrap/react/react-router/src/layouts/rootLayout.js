@@ -9,7 +9,7 @@ export default function RootLayout(){
         <div className="root-header">
             <section className="root-nav">
                 <nav>
-                    <h1>Root Header - Nav</h1>
+                    <h1>Headcrabs, Where!?</h1>
                     <Link to='/'>Home Page</Link>
                     <Link to='cards'>Fav. Cards</Link>
                     <Link to='/gooba'>TODO</Link>
