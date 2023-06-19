@@ -1,32 +1,109 @@
-.App {
-  text-align: center;
+:root{
+    --prim: #bc4123;
+    --txt: whitesmoke;
+    --sec: #2b3452;
+}
+html{
+    background-color: var(--sec);
 }
 
-
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+body{
+    color: var(--txt);
 }
 
-.App-link {
-  color: #61dafb;
+/*                          Styling for the nav bar */
+.root-nav nav{
+    display: flex;
+    gap: 6px;
+    justify-content: flex-end;
+    margin: 0 auto;
+    /* outline: dashed rosybrown;
+    outline-width: 1px; */
 }
 
-.magicCardSearch-main .magicCard{
-  background-color: #282c34;
-  opacity:  50%;
-  
+.root-nav h1{
+    margin-right: auto;
+    border-bottom: solid var(--prim);
 }
 
-.magicCardSearch-main .magicCard:hover{
-  background-color: #282c34;
-  opacity:  100%;
-  
+.root-nav a{
+    text-decoration: none;
+    padding: 6px;
+    border-radius: 4px;
+    margin-top: auto;
+    margin-bottom: auto;
+    /* outline: dashed rosybrown;
+    outline-width: 1px; */
+    color: var(--txt);
+}
+
+/*                          Styling for cardsLayout components*/
+.cards-header h1{
+    text-align: center;
+}
+
+/*                          Styling for the list of all favorite cards */
+.card-list{
+    display: flex;
+    justify-content: space-around;
+}
+
+.card-list a{
+    color: var(--txt);
+    text-align: center;
+}
+
+/*                          Styling for the Card detail page */
+.card-header #card-image{
+    text-align: center;
+}
+
+.card-header h3{
+    border-bottom: solid var(--prim);
+}
+
+.card-header #card p{
+    white-space: pre-line;
+}
+
+/*                          Styling for the custom 404 screen */
+.four-oh-four-header{
+    text-align: center;
+    text-shadow: 3px 3px 4px black;
+}
+
+.four-oh-four-header a{
+    color: var(--prim);
+    font-size: 200%;
+}
+
+.four-oh-four-header #error-image img{
+    max-width: 35%;
+    max-height: auto;
+    margin: 5%;
+}
+
+/*                          Styling for the card component if no card id matches */
+.err-card-not-found-header{
+    text-align: center;
+    text-shadow: 3px 3px 4px black;
+}
+
+.err-card-not-found-header a
+{    color: var(--prim);
+    font-size: 150%;
+}
+
+/*                          Styling For the Bread Crumb Trail Underneith the Nav */
+.crumbs-header > *{
+    display: inline-block;
+}
+
+.crumbs-header .crumb:after{
+    content: '>';
+    margin-left: 10px;
+}
+
+.crumbs-header .crumb:last-child:after{
+    display: none;
 }

@@ -1,38 +1,38 @@
+import { RouterProvider, createBrowserRouter, createRoutesFromElements, Route } from 'react-router-dom';
 import './App.css';
-import {RouterProvider, createBrowserRouter, createRoutesFromElements, Route, } from 'react-router-dom';
 
-//Pages
-import Home from './Pages/Home'; 
-import {Stories, storyLoader} from './Pages/Stories';
-import NoPage from './Pages/NoPage';
-import MagicCards from './Pages/MagicCards';
-import Name from './Pages/Name';
+//layouts
+import RootLayout from './layouts/rootLayout';
+import CardsLayout from './layouts/cardsLayout';
 
-//Layouts
-import RouterLayout from './Layouts/RouterLayout';
-import AboutLayout from './Layouts/AboutLayout';
-import ContactLayout from './Layouts/ContactLayout';
+//pages
+import Home from './pages/home';
+import {Cards, cardsLoader} from './pages/cards';
+import {Card, cardLoader} from './pages/card';
+
+//error pages
+import NoPage from './pages/errorPages/noPage';
+import NoCard from './pages/errorPages/noCard';
 
 function App() {
   const router = createBrowserRouter(
     createRoutesFromElements(
-      <Route path='/' element={<RouterLayout/>}>
+      <Route path='/' element={<RootLayout/>}>
         <Route index element={<Home/>}/>
-        <Route path='about' element={<AboutLayout/>}>
-          <Route path='contact' element ={<ContactLayout/>}>
-            <Route path=':name' element={<Name/>}/>
-          </Route>
-          <Route path='magic-cards' element={<MagicCards/>}/>
+        <Route path='cards' element={<CardsLayout/>}>
+          <Route index loader={cardsLoader} element={<Cards/>}/>
+          <Route path=':card_id' loader={cardLoader} errorElement={<NoCard/>} element={<Card/>}/>
         </Route>
-        <Route path='stories' loader = {storyLoader} element={<Stories/>}/>
         <Route path='*' element={<NoPage/>}/>
       </Route>
     )
-  );
+  ) 
 
   return (
-    <div className='App'>
-      <RouterProvider router={router}/>
+    <div className="App">
+      <header className="App-header">
+        <RouterProvider router ={router}/>
+      </header>
     </div>
   );
 }
