@@ -2,7 +2,7 @@ export default function AddCard({card}){
     const foundCard = card;
 
     const handleAddCardToList = async (card)=>{
-        const dbServer = 'http://localhost:4000';
+        const dbServer = 'http://localhost:4000/favCardList';
         var httpRequestOptions= {
             method: "POST",
             headers: {
@@ -12,9 +12,25 @@ export default function AddCard({card}){
         }
 
         try{
-            httpRequestOptions.body=JSON.stringify(card);
+            const cardDataToAdd = {
+                name: card.name,
+                small_image: card.image_uris.small,
+                normal_image: card.image_uris.normal,
+                rule_text: card.oracle_text
+            };
+
+            httpRequestOptions.body=JSON.stringify(cardDataToAdd);
+
             const response = await fetch(dbServer, httpRequestOptions);
-            console.log(`client after fetch ${response.ok}`);
+
+            if(!response.ok)
+            {
+                //TODO
+            }
+            else
+            {
+                //TODO
+            }
         }
         catch(e)
         {

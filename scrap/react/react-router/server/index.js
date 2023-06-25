@@ -12,21 +12,29 @@ mongoose.connect('mongodb://localhost:27017/reactRouterv2');
 //schema information
 const favCards = require('./schema/card');
 
-//this adds the request body to the requests
+//this middleware adds the request body to the requests
 server.use(express.json());
 
 //server routing
 // this endpoint will return all cards from favCards Collection
 server.get('/favCardList', async (req, res)=>{
-    console.log("get @ endpoint: /");
+    console.log("get @ endpoint: /favCardList");
     const ret = await favCards.find();
 
     res.send(ret);
 });
 
 // this endpoint will add a new card to the favCards Collection
-server.post('/favCardList', (req, res)=>{
+server.post('/favCardList', async (req, res)=>{
+    console.log("post @ endpoint: /favCardList");
 
+    const existCheck = await favCards.find({name: req.body.name});
+    if(!existCheck)
+    {
+        await favCards.create(req.body);
+    }
+
+    res.send("Card May Have Been Added");
 });
 
 // this endpoint will remove a card from the favCards Collection
