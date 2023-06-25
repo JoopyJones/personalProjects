@@ -4,6 +4,7 @@ import './App.css';
 //layouts
 import RootLayout from './layouts/rootLayout';
 import CardsLayout from './layouts/cardsLayout';
+import CardSearchLayout from './layouts/cardSearchLayout';
 
 //pages
 import Home from './pages/home';
@@ -24,8 +25,10 @@ function App() {
         <Route path='cards' element={<CardsLayout/>}>
           <Route index loader={cardsLoader} element={<Cards/>}/>
           <Route path=':card_id' loader={cardLoader} errorElement={<NoCard/>} element={<Card/>}/>
-          <Route path='search' element={<CardSearch/>} action={handleCardSearch}/>
-          <Route path='random' element={<RandomCard/>}/>
+          <Route path='card-search' element={<CardSearchLayout/>}>
+            <Route path='search' element={<CardSearch/>} action={handleCardSearch}/>
+            <Route path='random' element={<RandomCard/>}/>
+          </Route>
         </Route>
         <Route path='*' element={<NoPage/>}/>
       </Route>
