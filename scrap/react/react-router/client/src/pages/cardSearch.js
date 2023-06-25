@@ -1,13 +1,15 @@
 import { Form, useActionData } from "react-router-dom";
+import AddCard from "../components/addCard";
 
 export  function CardSearch(){
     const searchRes = useActionData();
 
     return(
         <div className="card-search-header">
-            <Form method="post" action="/cards/search">
+            <Form method="post" action="/cards/card-search/search">
                 <input type="text" name="card_name" placeholder="Enter a Card Name"></input>
                 <button type="submit">Search</button>
+                {searchRes && <AddCard card={searchRes}/>}
             </Form>
             <div className="card-search-error">
                 {searchRes && searchRes.error_message && <p>{searchRes.error_message}</p>}

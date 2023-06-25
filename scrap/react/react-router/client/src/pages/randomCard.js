@@ -1,4 +1,5 @@
 import { useState } from "react";
+import AddCard from "../components/addCard";
 
 export default function RandomCard(){
     const url = 'https://api.scryfall.com/';
@@ -32,6 +33,7 @@ export default function RandomCard(){
         <div className="magicCardSearch-main">
             <h2>Random Magic Card</h2>
             <button onClick={searchForRandomCards}>Return Random Cards<br/>*Click for Scryfall, Shift-Click for TCGPlayer*</button>
+            {card[0] && <AddCard card={card[0]}/>}
             {card.map((c)=>{
                 return(
                     <div key={c.name} className="magicCard">
