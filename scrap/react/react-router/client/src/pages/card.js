@@ -1,12 +1,12 @@
 import { useLoaderData} from "react-router-dom";
-import { faveCardList } from "../data/faveCardList";
+// import { faveCardList } from "../data/faveCardList";
 
 export function Card(){
     const card = useLoaderData();
 
     return(
         <div className="card-header">
-            <div key={card.id} id="card">
+            <div key={card._id} id="card">
                 <div id="card-image">
                     <img src={card.normal_image} alt=""></img>
                 </div>
@@ -18,13 +18,17 @@ export function Card(){
 
 }
 
-export function cardLoader({params}){
+export async function cardLoader({params}){
     const {card_id} = params; //passed in parameter for the specific data to load
-    const cardList = faveCardList; //the array of cards we need to search through to find the requested card
+    // const cardList = faveCardList; //the array of cards we need to search through to find the requested card
+
+    //TODO LATER INSTEAD OF FETCHING DATA AGAIN, USE REDUX TO PASS IN CARD LIST
+    const cardsList = await fetch('http://localhost:4000/favCardList');
+    const cardData = await cardsList.json();
 
     //find the requested card
-    const retCardArray = cardList.filter((card)=>{
-        return card.id === card_id.toString();
+    const retCardArray = cardData.filter((card)=>{
+        return card._id === card_id.toString();
     });
 
     //pull out the first result, just in case there are multiples
