@@ -11,18 +11,20 @@ TODO
 
 BUGS
 
-  1. When adding a new card and going back to the cards screen, the href for the new card isn't set to anything
-      - this is because the link is dependent on the mongodb entry id, and since we don't query the database again, we don't have this value
-      - solution: change the route parameter to be the card name, not the mongodb entry id
+  1. Esika card screen doesn't work
+      - now that we are replacing " " with "_" it looks to be messing with her name.
+      - need to validate and see if other cards are messing up as well.
+    
+  2. Each time the code is saved while the app is open, the cards get re-added to the store.
   
-  2. Once in the focused card screen, if you click on the breadcrumb of that card id, it will go to the 404 page.
+  3. Once in the focused card screen, if you click on the breadcrumb of that card id, it will go to the 404 page.
       - goes to /<card_id> rather than /cards/<card_id>
   
-  3. If you try to go to /cards/<card_id> for one that doeesn't exist, the error is not caught by the route error functionality
+  4. If you try to go to /cards/<card_id> for one that doeesn't exist, the error is not caught by the route error functionality
   
-  4. Once in the focused card screen, if you refresh the page the card not page will show
+  5. Once in the focused card screen, if you refresh the page the card not page will show
       - the route error handling does work correctly here
       - think it's because the page loads before the state is finished loading?
   
-  5. Card list becomes misaligned when card titles has more than 1 line of text
-  6. Dual sided cards currently break search logic
+  6. Card list becomes misaligned when card titles has more than 1 line of text
+  7. Dual sided cards currently break search logic
