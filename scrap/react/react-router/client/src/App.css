@@ -55,8 +55,8 @@ body{
 
 /*                          Styling for the list of all favorite cards */
 .card-list{
-    display: flex;
-    justify-content: space-around;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
 }
 
 .card-list a{
@@ -73,6 +73,11 @@ body{
 
 .card-header #card-image{
     text-align: center;
+}
+
+.card-header #card-image img{
+    max-width: 20%;
+    max-height: auto;
 }
 
 .card-header h3{
@@ -97,7 +102,8 @@ body{
 .four-oh-four-header #error-image img{
     max-width: 35%;
     max-height: auto;
-    margin: 5%;
+    margin: 2%;
+    justify-content: center;
 }
 
 /*                          Styling for the card component if no card id matches */

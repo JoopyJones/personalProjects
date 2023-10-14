@@ -29,7 +29,8 @@ server.post('/favCardList', async (req, res)=>{
     console.log("post @ endpoint: /favCardList");
 
     const existCheck = await favCards.find({name: req.body.name});
-    if(!existCheck)
+
+    if(existCheck.length == 0)
     {
         await favCards.create(req.body);
     }
@@ -39,7 +40,7 @@ server.post('/favCardList', async (req, res)=>{
 
 // this endpoint will remove a card from the favCards Collection
 server.delete('/favCardList', (req, res)=>{
-
+    //TODO
 });
 
 server.listen(serverPort, ()=>{

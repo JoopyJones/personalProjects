@@ -9,7 +9,7 @@ export  function CardSearch(){
             <Form method="post" action="/cards/card-search/search">
                 <input type="text" name="card_name" placeholder="Enter a Card Name"></input>
                 <button type="submit">Search</button>
-                {searchRes && <AddCard card={searchRes}/>}
+                {searchRes && searchRes.object && <AddCard card={searchRes}/>}
             </Form>
             <div className="card-search-error">
                 {searchRes && searchRes.error_message && <p>{searchRes.error_message}</p>}
@@ -37,7 +37,7 @@ export async function handleCardSearch({request}){
     {
         const validSearchVal = searchVal.replace(' ', '+');
         const searchResponse = await fetch(`${url}${group}${searchType}${validSearchVal}`);
-        
+
         if(!searchResponse.ok)
         {
             return{error_message: 'Card Could Not Be Found - Please Try Another Search'}
