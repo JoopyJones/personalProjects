@@ -39,8 +39,13 @@ server.post('/favCardList', async (req, res)=>{
 });
 
 // this endpoint will remove a card from the favCards Collection
-server.delete('/favCardList', (req, res)=>{
+server.delete('/favCardList', async (req, res)=>{
     //TODO
+    console.log("delete @ endpoint: /favCardList");
+
+    await favCards.findOneAndRemove({name: req.body.name});
+
+    res.send("Card Has Been Removed");
 });
 
 server.listen(serverPort, ()=>{

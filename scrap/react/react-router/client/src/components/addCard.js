@@ -1,7 +1,12 @@
+import { useDispatch } from "react-redux";
+import { ADD_CARD } from "../redux/reducers/cardListSlice";
+
 export default function AddCard({card}){
     const foundCard = card;
+    const dispatch = useDispatch();
 
     const handleAddCardToList = async (card)=>{
+
         const dbServer = 'http://localhost:4000/favCardList';
         var httpRequestOptions= {
             method: "POST",
@@ -26,10 +31,11 @@ export default function AddCard({card}){
             if(!response.ok)
             {
                 //TODO
+                console.log("The card could not be added to the database");
             }
             else
             {
-                //TODO
+                dispatch(ADD_CARD(cardDataToAdd));
             }
         }
         catch(e)
