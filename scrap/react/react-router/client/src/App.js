@@ -1,12 +1,9 @@
+//react-router-dom
 import { RouterProvider, createBrowserRouter, createRoutesFromElements, Route } from 'react-router-dom';
-import './App.css';
-import { useDispatch } from 'react-redux';
-import { ADD_CARD } from './redux/reducers/cardListSlice';
 
-//layouts
-import RootLayout from './layouts/rootLayout';
-import CardsLayout from './layouts/cardsLayout';
-import CardSearchLayout from './layouts/cardSearchLayout';
+//redux
+import { useDispatch } from 'react-redux';
+import { ADD_CARD, CLEAR_CARDS } from './redux/reducers/cardListSlice';
 
 //pages
 import Home from './pages/home';
@@ -15,25 +12,34 @@ import {Card, cardLoader} from './pages/card';
 import RandomCard from './pages/randomCard';
 import {CardSearch, handleCardSearch} from './pages/cardSearch';
 
+//layouts
+import RootLayout from './layouts/rootLayout';
+import CardsLayout from './layouts/cardsLayout';
+import CardSearchLayout from './layouts/cardSearchLayout';
+
 //error pages
 import NoPage from './pages/errorPages/noPage';
 import NoCard from './pages/errorPages/noCard';
+
+//styling
+import './App.css';
 
 function App() {
   const dispatch = useDispatch();
 
     async function getCardsFromDb(){
+      //this clears the state to avoid duplicating cards in store. happends from saving code during dev
+      dispatch(CLEAR_CARDS());
+
       const cardsList = await fetch('http://localhost:4000/favCardList');
       const cardData = await cardsList.json();
       
-      // cardData.map(card =>{
-      //   dispatch(ADD_CARD(card));
-      // });
       for(let card of cardData){
         dispatch(ADD_CARD(card));
       }
     };
 
+    //grab all cards from database and load into store
     getCardsFromDb();
 
   const router = createBrowserRouter(

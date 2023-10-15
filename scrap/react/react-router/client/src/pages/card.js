@@ -1,6 +1,11 @@
-import { useDispatch, useSelector } from "react-redux";
+//react-router-dom
 import { useLoaderData, useParams} from "react-router-dom";
-import { REMOVE_CARD } from "../redux/reducers/cardListSlice";
+
+//redux
+import { useDispatch, useSelector } from "react-redux";
+import DeleteCard from "../components/deleteCard";
+
+//data from file 
 // import { faveCardList } from "../data/faveCardList";
 
 export function Card(){
@@ -22,19 +27,22 @@ export function Card(){
     //      will probably have to write jsx instead of having the route handle it
     if(retCard == null)
     {
-        throw Error(`Card with name ${card_name} could not be found!`)
+        //throw Error(`Card with name ${card_name} could not be found!`)
     }
 
     return(
-        <div className="card-header">
-            <div key={retCard.name} id="card">
-                <div id="card-image">
-                    <img src={retCard.normal_image} alt=""></img>
-                </div>
-                <h3>{retCard.name}</h3>
-                <p>{retCard.rule_text}</p>
-            </div>
-        </div>
+        (retCard && (<div className="card-header">
+                        <div key={retCard.name} id="card">
+                            <div id="card-image">
+                                <img src={retCard.normal_image} alt=""></img>
+                            </div>
+                            <div id="deleteButton">
+                                <DeleteCard card={retCard}/>
+                            </div>
+                            <h3>{retCard.name}</h3>
+                            <p>{retCard.rule_text}</p>
+                        </div>
+                    </div>))
     )
 
 }

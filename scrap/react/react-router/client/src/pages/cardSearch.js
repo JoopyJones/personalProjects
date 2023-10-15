@@ -1,5 +1,8 @@
-import { Form, useActionData } from "react-router-dom";
+//components
 import AddCard from "../components/addCard";
+
+//react-router-dom
+import { Form, useActionData } from "react-router-dom";
 
 export  function CardSearch(){
     const searchRes = useActionData();

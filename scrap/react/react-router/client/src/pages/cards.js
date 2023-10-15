@@ -1,4 +1,7 @@
+//redux
 import { useSelector } from "react-redux";
+
+//react-router-dom
 import { Link, useLoaderData } from "react-router-dom";
 
 //js file to load in card list
@@ -6,6 +9,7 @@ import { Link, useLoaderData } from "react-router-dom";
 
 export function Cards(){
     //const cards = useLoaderData();
+    
     const cards = useSelector(state => state.cardList)
 
     return(

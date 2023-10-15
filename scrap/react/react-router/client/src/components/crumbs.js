@@ -1,3 +1,4 @@
+//react-router-dom
 import {Link, useLocation } from "react-router-dom";
 
 export default function Crumbs(){
@@ -10,19 +11,25 @@ export default function Crumbs(){
         return crumb;
     });
 
-    var crumbs = [''];
+    const crumbs = pathPages ? ['/', ...pathPages] : [''];
 
-    if(pathPages)
-    {
-        crumbs = ['/', ...pathPages];
-    }
+    var breadPair = [];
+    crumbs.reduce((prev,curr)=>{
+        let x = prev === '/' ? '' : prev;
+        let y = curr === '/' ? '' : curr;
+
+        breadPair.push({path: `${x}/${y}`,
+                        name: curr});
+
+        return `${x}/${y}`;
+    },'/')
 
     return(
         <div className="crumbs-header">
-            {crumbs.map((path)=>{
+            {breadPair.map((pair)=>{
                 //if the current path section is root, print home instead
                 return(
-                    <Link className="crumb" key={path} to={path}>{path === '/' ? 'Home': path}</Link>
+                    <Link className="crumb" key={pair.path} to={pair.path}>{pair.name === '/' ? 'Home': pair.name}</Link>
                 )
             })}
         </div>
