@@ -1,26 +1,15 @@
 TODO
 
   SERVER
-   - add in error handling into all endpoints
   
   CLIENT
   * update card list page to include a button to remove cards from the list
-  * add functionality to remove card from store when deleted
-  - add client side error handling for the db fetches
   - do something with the home page and todo page - these should be new react concepts
 
 BUGS
-
-  1. Each time the code is saved while the app is open, the cards get re-added to the store.
+  1. Dual sided cards currently break search logic
+  2. If you try to go to /cards/<card_id> for one that doeesn't exist, the error is not caught by the route error functionality
+      - currently have the manual error disabled, currently will show blank card page
+      - solution: implement JSX to be shown instead of hoping route error will catch it
   
-  2. Once in the focused card screen, if you click on the breadcrumb of that card id, it will go to the 404 page.
-      - goes to /<card_id> rather than /cards/<card_id>
-  
-  3. If you try to go to /cards/<card_id> for one that doeesn't exist, the error is not caught by the route error functionality
-  
-  4. Once in the focused card screen, if you refresh the page the card not page will show
-      - the route error handling does work correctly here
-      - think it's because the page loads before the state is finished loading?
-  
-  5. Card list becomes misaligned when card titles has more than 1 line of text
-  6. Dual sided cards currently break search logic
+  3. Card list becomes misaligned when card titles has more than 1 line of text
