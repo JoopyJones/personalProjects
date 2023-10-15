@@ -1,15 +1,21 @@
+//redux
+import { useSelector } from "react-redux";
+
+//react-router-dom
 import { Link, useLoaderData } from "react-router-dom";
 
 //js file to load in card list
 // import { faveCardList } from "../data/faveCardList"
 
 export function Cards(){
-    const cards = useLoaderData();
+    //const cards = useLoaderData();
+    
+    const cards = useSelector(state => state.cardList)
 
     return(
         <div className="card-list">
             {cards.map((card)=>{
-                return(<Link to={card._id} key={card._id}>
+                return(<Link to={card.name.replaceAll("/","").replaceAll(" ", "_")} key={card.name}>
                             <div className="individual-card">
                                 <h3>{card.name}</h3>
                                 <img src={card.small_image} alt=""></img>

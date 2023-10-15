@@ -1,6 +1,7 @@
+//react-router-dom
 import { Link, Outlet } from "react-router-dom";
 
-//user components
+//components
 import Crumbs from "../components/crumbs";
 
 export default function RootLayout(){

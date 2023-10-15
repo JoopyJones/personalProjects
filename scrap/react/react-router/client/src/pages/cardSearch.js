@@ -1,8 +1,20 @@
-import { Form, useActionData } from "react-router-dom";
+//components
 import AddCard from "../components/addCard";
+//react-router-dom
+import { Form, useActionData } from "react-router-dom";
 
 export  function CardSearch(){
     const searchRes = useActionData();
+
+    //handles click events on card images
+    function handleCardUri(e,c){
+        if(e.shiftKey){
+            window.open(c.purchase_uris.tcgplayer,'_blank').focus();
+        }
+        else{
+            window.open(c.scryfall_uri,'_blank').focus();
+        }
+    }
 
     return(
         <div className="card-search-header">
@@ -15,7 +27,9 @@ export  function CardSearch(){
                 {searchRes && searchRes.error_message && <p>{searchRes.error_message}</p>}
                 {searchRes && searchRes.object && <div className="card-from-search">
                         <div>
-                            <img src={searchRes.image_uris.small} alt=""></img>
+                            <img src={searchRes.image_uris.normal} onClick={(e)=>{
+                                handleCardUri(e,searchRes);
+                            }} title="*Click for Scryfall, Shift-Click for TCGPlayer*" alt=""></img>
                         </div>
                         <p>{searchRes.oracle_text}</p>
                     </div>}
@@ -43,9 +57,24 @@ export async function handleCardSearch({request}){
             return{error_message: 'Card Could Not Be Found - Please Try Another Search'}
         }
 
-        const cardsearchData = await searchResponse.json();
+        var cardData = await searchResponse.json();
+
+        //if we don't have image_uris, then we know we have a double faced card
+        //need to grab required info from first face
+        if(!cardData.image_uris)
+        {
+            cardData = {
+                ...cardData,
+                image_uris:{
+                    small: cardData.card_faces[0].image_uris.small,
+                    normal: cardData.card_faces[0].image_uris.normal
+                },
+                oracle_text: cardData.card_faces[0].oracle_text
+            }
+
+        }
         
-        return cardsearchData;
+        return cardData;
     }
     else{
         return{error_message: 'Search Was Empty - Please Enter Something'}

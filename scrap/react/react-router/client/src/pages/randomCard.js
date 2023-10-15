@@ -1,25 +1,39 @@
-import { useState } from "react";
+//components
 import AddCard from "../components/addCard";
+
+//react
+import { useState } from "react";
 
 export default function RandomCard(){
     const url = 'https://api.scryfall.com/';
     const group = 'cards/';
     const action = 'random';
-    const [card, setCard] = useState([]);
+    const [card, setCard] = useState();
 
     async function searchForRandomCards(){
-        var cardList = [];
 
-        for(let i=0; i<1; i++)
+        const response = await fetch(`${url}${group}${action}`);
+        var cardData = await response.json();
+
+        //if we don't have image_uris, then we know we have a double faced card
+        //need to grab required info from first face
+        if(!cardData.image_uris)
         {
-            const response = await fetch(`${url}${group}${action}`);
-            const data = await response.json();
-            cardList.push(data);
+            cardData = {
+                ...cardData,
+                image_uris:{
+                    small: cardData.card_faces[0].image_uris.small,
+                    normal: cardData.card_faces[0].image_uris.normal
+                },
+                oracle_text: cardData.card_faces[0].oracle_text
+            }
+
         }
 
-        setCard(cardList);
+        setCard(cardData);
     }
 
+    //handles click events on card images
     function handleCardUri(e,c){
         if(e.shiftKey){
             window.open(c.purchase_uris.tcgplayer,'_blank').focus();
@@ -32,17 +46,13 @@ export default function RandomCard(){
     return(
         <div className="magicCardSearch-main">
             <h2>Random Magic Card</h2>
-            <button onClick={searchForRandomCards}>Return Random Cards<br/>*Click for Scryfall, Shift-Click for TCGPlayer*</button>
-            {card[0] && <AddCard card={card[0]}/>}
-            {card.map((c)=>{
-                return(
-                    <div key={c.name} className="magicCard">
-                        <img src={c.image_uris.normal} onClick={(e)=>{
-                            handleCardUri(e,c);
-                        }} alt=""></img>
-                    </div>
-                )
-            })}
+            <button onClick={searchForRandomCards}>Return Random Cards</button>
+            {card && <AddCard card={card}/>}
+            {card && <div key={card.name} className="magicCard">
+                        <img src={card.image_uris.normal} onClick={(e)=>{
+                            handleCardUri(e,card);
+                        }} title="*Click for Scryfall, Shift-Click for TCGPlayer*" alt=""></img>
+                    </div>}
         </div>
     )
 }
