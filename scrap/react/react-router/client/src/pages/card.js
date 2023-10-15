@@ -2,7 +2,7 @@
 import { useLoaderData, useParams} from "react-router-dom";
 
 //redux
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import DeleteCard from "../components/deleteCard";
 
 //data from file 
@@ -12,37 +12,36 @@ export function Card(){
     //const card = useLoaderData();
 
     const {card_name} = useParams();
-    const cardData = useSelector(state => state.cardList);
-    const dispatch = useDispatch();
+    const cardList = useSelector(state => state.cardList);
 
     //find the requested card
-    const retCardArray = cardData.filter((card)=>{
+    const retCardArray = cardList.filter((card)=>{
         return card.name.replaceAll("/","").replaceAll(" ", "_") === card_name.toString();
     });
 
     //pull out the first result, just in case there are multiples
-    const [retCard] = retCardArray;
+    const [card] = retCardArray;
 
     //TODO - now that we are not throwing the error in a loader function, the error isn't caught
     //      will probably have to write jsx instead of having the route handle it
-    if(retCard == null)
+    if(card == null)
     {
         //throw Error(`Card with name ${card_name} could not be found!`)
     }
 
     return(
-        (retCard && (<div className="card-header">
-                        <div key={retCard.name} id="card">
-                            <div id="card-image">
-                                <img src={retCard.normal_image} alt=""></img>
-                            </div>
-                            <div id="deleteButton">
-                                <DeleteCard card={retCard}/>
-                            </div>
-                            <h3>{retCard.name}</h3>
-                            <p>{retCard.rule_text}</p>
+        (card && (<div className="card-header">
+                    <div key={card.name} id="card">
+                        <div id="card-image">
+                            <img src={card.normal_image} alt=""></img>
                         </div>
-                    </div>))
+                        <div id="deleteButton">
+                            <DeleteCard card={card}/>
+                        </div>
+                        <h3>{card.name}</h3>
+                        <p>{card.rule_text}</p>
+                    </div>
+                </div>))
     )
 
 }

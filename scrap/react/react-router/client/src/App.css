@@ -84,7 +84,6 @@ body{
 
 .card-header #card-image img{
     max-width: 20%;
-    max-height: auto;
 }
 
 .card-header h3{
@@ -113,7 +112,6 @@ body{
 
 .four-oh-four-header #error-image img{
     max-width: 35%;
-    max-height: auto;
     margin: 2%;
     justify-content: center;
 }
