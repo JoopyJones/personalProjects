@@ -18,9 +18,6 @@ export function Cards(){
     
     const cards = useSelector(state => state.cardList);
 
-    //TODO bug on delete button - if clicked it will click the button and the card link at same time
-    //  if we comment out the link, the delete works perfectly. need to figure out good way to only click
-    //  delete while link is still active
     return(
         <div className="card-list">
             {cards.map((card)=>{
