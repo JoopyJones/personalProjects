@@ -5,7 +5,7 @@ import { REMOVE_CARD } from "../redux/reducers/cardListSlice";
 //router
 import { useNavigate } from "react-router-dom";
 
-export default function DeleteCard({card}){
+export default function DeleteCard({card, setDisableCardLink}){
     const targetCard = card;
     const navigate = useNavigate();
 
@@ -58,9 +58,11 @@ export default function DeleteCard({card}){
                 }
                 else
                 {
+                    const currentPath = window.location.pathname;
+
                     //remove target card from store
                     dispatch(REMOVE_CARD(cardDataToRemove));
-                    navigate("/cards/");
+                    currentPath !== '/cards' && navigate("/cards/");
                 }
             }
             catch(e)
@@ -73,11 +75,24 @@ export default function DeleteCard({card}){
         }
     }
 
+    //when we mouse over the delete button on /cards/, disable the link
+    //this prevents the delete button from clicking the card link at the same time
+    const handleMouseEnter = ()=>{
+        setDisableCardLink(true);
+    };
+
+    //when we mouse off the delete button on /cards/, re-enable the link
+    const handleMouseLeave = ()=>{
+        setDisableCardLink(false);
+    };
+
     return(
         <div className="delete-card-hearder">
-            <button onClick={()=>{
-                handleDeleteCardFromList(targetCard)
-            }}>Delete Card from List</button>
+            <button onMouseEnter={setDisableCardLink && handleMouseEnter}
+                    onMouseLeave={setDisableCardLink && handleMouseLeave}
+                    onClick={()=>{
+                        handleDeleteCardFromList(targetCard)
+                    }}></button>
         </div>
     )
 }

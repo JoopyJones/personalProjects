@@ -8,15 +8,15 @@ const cardListSlice = createSlice({
     initialState,
     reducers:{
         ADD_CARD: (state, action)=>{
-            console.log(`STORE - Card ${action.payload.name} added to store`);
+            //console.log(`STORE - Card ${action.payload.name} added to store`);
             state.push(action.payload);
         },
         CLEAR_CARDS: ()=>{
-            console.log("STORE - Store being cleared");
+            //console.log("STORE - Store being cleared");
             return initialState;
         },
         REMOVE_CARD: (state,action)=>{
-            console.log(`STORE - Card ${action.payload.name} removed from store`);
+            //console.log(`STORE - Card ${action.payload.name} removed from store`);
 
             return state.filter((card)=>{
                 return card.name !== action.payload.name;
