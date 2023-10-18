@@ -66,9 +66,29 @@ body{
     margin-right: 20%;
 }
 
-.card-list .individual-card button{
+.card-list .individual-card .card-image-overlay{
     position:relative;
-    bottom:50px;
+    width: auto;
+}
+
+.card-list .individual-card .card-image-overlay button{
+    position:absolute;
+    top:0;
+    right: .5em;
+    color: red;
+}
+
+/*these 3 lines change the button text from X to Remove while hovering*/
+.card-list .individual-card .card-image-overlay button:after{
+    content: 'X';
+}
+
+.card-list .individual-card .card-image-overlay button:hover:after{
+    content: '';
+}
+
+.card-list .individual-card .card-image-overlay button:hover:before{
+    content: 'Remove';
 }
 
 /*                          Styling for the Card detail page */
@@ -98,6 +118,12 @@ body{
     text-align: center;
     margin-top: 1%;
 }
+
+.card-header #card button:after{
+    content: 'Remove from List';
+}
+
+
 
 /*                          Styling for the custom 404 screen */
 .four-oh-four-header{

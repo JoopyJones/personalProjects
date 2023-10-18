@@ -7,18 +7,30 @@ import { Link, useLoaderData } from "react-router-dom";
 //js file to load in card list
 // import { faveCardList } from "../data/faveCardList"
 
+//components
+import DeleteCard from "../components/deleteCard";
+import { useState } from "react";
+
 export function Cards(){
     //const cards = useLoaderData();
-    
-    const cards = useSelector(state => state.cardList)
 
+    const [disableCardLink, setDisableCardLink] = useState(false);
+    
+    const cards = useSelector(state => state.cardList);
+
+    //TODO bug on delete button - if clicked it will click the button and the card link at same time
+    //  if we comment out the link, the delete works perfectly. need to figure out good way to only click
+    //  delete while link is still active
     return(
         <div className="card-list">
             {cards.map((card)=>{
-                return(<Link to={card.name.replaceAll("/","").replaceAll(" ", "_")} key={card.name}>
+                return(<Link to={disableCardLink ? '' : card.name.replaceAll("/","").replaceAll(" ", "_")} key={card.name}>
                             <div className="individual-card">
                                 <h3>{card.name}</h3>
-                                <img src={card.small_image} alt=""></img>
+                                <div className="card-image-overlay">
+                                    <img src={card.small_image} alt=""></img>
+                                    <DeleteCard card={card} setDisableCardLink={setDisableCardLink}/>
+                                </div>
                             </div>
                         </Link>)
             })}
