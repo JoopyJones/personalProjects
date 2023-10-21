@@ -17,8 +17,6 @@ body{
     gap: 6px;
     justify-content: flex-end;
     margin: 0 auto;
-    /* outline: dashed rosybrown;
-    outline-width: 1px; */
 }
 
 .root-nav h1{
@@ -32,8 +30,6 @@ body{
     border-radius: 4px;
     margin-top: auto;
     margin-bottom: auto;
-    /* outline: dashed rosybrown;
-    outline-width: 1px; */
     color: var(--txt);
 }
 /*                          Styling or card sub nav*/
@@ -59,22 +55,42 @@ body{
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
 }
 
-.card-list a{
-    color: var(--txt);
+.card-list .individual-card{
     text-align: center;
-    margin-left: 20%;
-    margin-right: 20%;
+    position: relative;
+    padding-bottom: 5%;
+}
+
+.card-list .individual-card h3{
+    position: absolute;
+    margin: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+
+.card-list .individual-card a{
+    display:block;
+    height: fit-content;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 15%;
 }
 
 .card-list .individual-card .card-image-overlay{
-    position:relative;
-    width: auto;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    width: fit-content;
+    height: fit-content;
 }
 
+
 .card-list .individual-card .card-image-overlay button{
-    position:absolute;
-    top:0;
-    right: .5em;
+    position: absolute;
+    top: 0;
+    right: 0;
     color: red;
 }
 
@@ -171,7 +187,7 @@ body{
 }
 
 .crumbs-header .crumb:last-child:after{
-    display: none;
+    content: none;
 }
 
 /*                          Styling for card search layout navigation*/
