@@ -21,15 +21,15 @@ export function Cards(){
     return(
         <div className="card-list">
             {cards.map((card)=>{
-                return(<Link to={disableCardLink ? '' : card.name.replaceAll("/","").replaceAll(" ", "_")} key={card.name}>
-                            <div className="individual-card">
-                                <h3>{card.name}</h3>
+                return(<div className="individual-card" key={card.name}>
+                            <h3>{card.name}</h3>
+                            <Link to={disableCardLink ? '' : card.name.replaceAll("/","").replaceAll(" ", "_")}>     
                                 <div className="card-image-overlay">
-                                    <img src={card.small_image} alt=""></img>
+                                    <img src={card.small_image} alt=""/>
                                     <DeleteCard card={card} setDisableCardLink={setDisableCardLink}/>
                                 </div>
-                            </div>
-                        </Link>)
+                            </Link>
+                        </div>)
             })}
         </div>
     )
