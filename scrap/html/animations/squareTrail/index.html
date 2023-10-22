@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Animation - Square Trails + Atom</title>
+  <!-- <script src="libraries/p5.js"></script>
+	<script src="libraries/p5.dom.js"></script>
+	<script type = "module" src="main.js"></script> -->
+  <link rel="stylesheet" href="index.css">
+</head>
+<body>
+
+  <div class="square" id="square">
+    <div class="innerSquare animation-square-follower" style="animation-delay: .9s"></div>
+    <div class="innerSquare animation-square-follower" style="animation-delay: .8s"></div>
+    <div class="innerSquare animation-square-follower" style="animation-delay: .7s"></div>
+    <div class="innerSquare animation-square-follower" style="animation-delay: .6s"></div>
+    <div class="innerSquare animation-square-follower" style="animation-delay: .5s"></div>
+    <div class="innerSquare animation-square-follower" style="animation-delay: .4s"></div>
+    <div class="innerSquare animation-square-follower" style="animation-delay: .3s"></div>
+    <div class="innerSquare animation-square-follower" style="animation-delay: .2s"></div>
+    <div class="innerSquare animation-square-follower" style="animation-delay: .1s"></div>
+    <div class="innerSquare animation-square-leader"></div>
+    <div class="nucleus"></div>
+    <div class="ring animation-ring-spin">
+      <div class="electron"></div>
+    </div>
+    <div class="ring animation-ring-spin" style="rotate: 45deg">
+      <div class="electron" style="rotate: 45deg; margin-left:auto;"></div>
+    </div>
+    <div class="ring animation-ring-spin" style="rotate: -45deg ">
+      <div class="electron" style="rotate: -45deg; margin-left:auto;"></div>
+    </div>
+  </div>
+  
+  <div class="slider">
+    <input type="range" id="size-slider" min="50" max="1000" >
+  </div>
+</body>
+
+<!-- javascript to animation pause state toggling -->
+<script>
+  const root = document.querySelector(":root");
+  const animationParent = document.getElementById("square");
+  const sliderElement = document.getElementById("size-slider");
+
+
+  //get the inital size of the animation, then remove 'px' from the value
+  const baseSizeFromRoot = getComputedStyle(root).getPropertyValue("--baseSize");
+  const sizeValue = parseInt(baseSizeFromRoot);
+
+  //this sets the sliders initial position to the relevant value
+  sliderElement.value = sizeValue;
+
+  //add event listeners
+  sliderElement.addEventListener("input", handleSizeSliderInput);
+  animationParent.addEventListener("click", handleAnimationPause);
+
+  function handleAnimationPause(){
+    //get the play state from the css file
+    const animationState = getComputedStyle(animationParent).getPropertyValue("animation-play-state");
+
+    //update the parent element's inline value - this overrides the css file value
+    animationState === "paused" ? animationParent.style.animationPlayState = "running" : animationParent.style.animationPlayState = "paused";
+
+  }
+
+  function handleSizeSliderInput(){
+    root.style.setProperty("--baseSize", `${sliderElement.value}px`)
+  }
+
+</script>
+</html>

@@ -1,0 +1,151 @@
+/*  
+    Document index
+
+    1. variable declarations
+    2. shapes section
+    3. animation class section
+    4. animations section
+*/
+    
+       
+/* variable declarations */
+    :root{
+        /* colors */
+        --primColor: slateblue;
+        --secColor: mediumspringgreen;
+
+        /* sizing */
+        --baseSize: 500px;
+        --ringSize: calc(var(--baseSize) * .0175);
+        --electronSize: calc(var(--baseSize)*.0375);
+
+        /* timings */
+        --animTime: 4.5s;
+    }
+
+/* shapes section */
+    body {margin: auto;}
+
+    .square{
+        width: var(--baseSize);
+        height: var(--baseSize);
+        background-color: var(--primColor);
+        margin-left: auto;
+        margin-right: auto;
+        border-radius: 27%;
+        position: relative;
+        animation-play-state: running;
+    }
+
+    .innerSquare{
+        width: 50%;
+        height: 50%;
+        border-radius: 12%;
+        background-color: var(--secColor);
+        transform: translateY(50%);
+        position: absolute;
+        left: 0;
+        top: auto;
+        bottom: auto;
+    }
+
+    .nucleus{
+        width: 10%;
+        height: 10%;
+        background-color: var(--primColor);
+        border-radius: 100%;
+        position: absolute;
+        bottom: 0;
+        top: 0;
+        right: 0;
+        left: 0;
+        margin: auto;
+    }
+
+    .ring{
+        width: 75%;
+        height: 25%;
+        border: var(--ringSize);
+        border-style: solid;
+        border-color: var(--primColor);
+        border-radius: 100%;
+        position: absolute;
+        bottom: 0;
+        top: 0;
+        right: 0;
+        left: 0;
+        margin: auto;
+    }
+
+    .electron{
+        width: var(--electronSize);
+        height: var(--electronSize);
+        background-color: var(--primColor);
+        border-radius: 100%;
+        margin-top: 7%;
+    }
+
+    .slider{
+        display: block;
+        text-align: center;
+        position: absolute;
+        bottom: 5%;
+        left: 0;
+        right: 0%;
+    }
+
+/* animation class section */
+    .animation-square-follower{
+        animation: square-follower var(--animTime);
+        animation-play-state: inherit;
+        animation-iteration-count: infinite;
+        animation-fill-mode:forwards;
+    }
+
+    .animation-square-leader{
+        animation: square-leader var(--animTime);
+        animation-play-state: inherit;
+        animation-iteration-count: infinite;
+        animation-fill-mode:forwards;
+    }
+
+    .animation-ring-spin{
+        animation: ring-spin calc(var(--animTime) * 2);
+        animation-play-state: inherit;
+        animation-iteration-count: infinite;
+        animation-timing-function: linear;
+    }
+
+/* animations section */
+    @keyframes square-follower {
+        25%{
+        transform: translateY(100%) translateX(50%) rotate(90deg);
+        background-color: var(--primColor);
+        }
+
+        50%{
+        transform: translateY(50%) translateX(100%) rotate(180deg);
+        background-color: var(--secColor);
+        }
+
+        75% {
+        transform: translateY(0%) translateX(50%) rotate(270deg);
+        background-color: var(--primColor);
+        }
+
+        100% {transform: translateY(50%) translateX(0%) rotate(360deg);}
+    }
+
+    @keyframes square-leader {
+        25%{transform: translateY(100%) translateX(50%) rotate(90deg);}
+
+        50%{transform: translateY(50%) translateX(100%) rotate(180deg);}
+
+        75% {transform: translateY(0%) translateX(50%) rotate(270deg);}
+
+        100% {transform: translateY(50%) translateX(0%) rotate(360deg);}
+    }
+
+    @keyframes ring-spin {
+        100%{transform: rotate(360deg);}
+    }
